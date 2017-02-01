@@ -1,6 +1,13 @@
 =begin
 Brandeis University - Capstone Project Software Engineering
-Written by Samuel Akerman Jan-2017
+PA2 assignment - written by Samuel Akerman Jan-2017
+
+
+user_id
+movie_id
+rating
+timestamp
+
 =end
 
 require 'byebug'
@@ -70,32 +77,23 @@ class Validator
 
         j = 0
         @test_set.each do |line|
-            if @predicted_ratings[j].floor == line[2].to_i
+            if @predicted_ratings[j].round == line[2].to_i
                 correct_predictions[line[2]] += 1
             else
                 incorrect_predictions[line[2]] += 1
             end
+            j+=1
         end
         [correct_predictions,incorrect_predictions,j]
     end
 end
 
-=begin
-cha = Time.now
-predictor = Ratings.new
-predictor.load_data(Dir.pwd+'/ml-100k/u1.base')
-puts predictor.predict("1", "2")
-puts predictor.predict("23", "787")
-cho = Time.now
-puts cho - cha
-=end
 
 start_timme = Time.now
 controler_predict = Control.new Dir.pwd+'/ml-100k/u1.base', Dir.pwd+'/ml-100k/u1.test'
 results = controler_predict.run
 end_time = Time.now
-puts "The analysis took" + ((end_time - start_timme)/60).round(2).to_s + " seconds."
-
+puts "The analysis took " + ((end_time - start_timme)/60).round(2).to_s + " minutes."
 puts "The percentage of correctly predicted ratings by rating:"
 puts "Rating of 1: " + results[0]["1"]/results[2]
 puts "Rating of 2: " + results[0]["2"]/results[2]
