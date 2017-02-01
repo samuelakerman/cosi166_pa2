@@ -3,12 +3,14 @@ Brandeis University - Capstone Project Software Engineering
 Written by Samuel Akerman Jan-2017
 =end
 
+
 require 'byebug'
 
 class MovieData
     def initialize
        @data = []       #@data is an array of arrays. Each cell has an array with: user_id, movie_id, rating, timestamp
        @stats = Hash.new   #@stats: key = movie_id, value = vector with two positions: avg rating, # of raters
+       @similar_users = Hash.new
     end
 
     def load_data(path)
@@ -109,16 +111,22 @@ class MovieData
     end
 
     def most_similar(user)
-        users = Hash.new                                #hash with a list of all users except *user*
-        @data.each do |line|
-            if users[line[0]].nil? && line[0]!=user       
-                users[line[0]] = 0                      #init hash
+        if @similar_users[user].nil?
+            users = Hash.new                                #hash with a list of all users except *user*
+            @data.each do |line|
+                if users[line[0]].nil? && line[0]!=user       
+                    users[line[0]] = 0                      #init hash
+                end
             end
+            users.each do |u|
+                users[u[0]] = self.similarity(u[0],user)    #calculate similarity index between *user* and the rest. Store in hash
+            end
+            similarity_list=(users.sort_by {|key, value| value}).reverse       #sort and reverse hash
+            top = similarity_list[0..20]                                        #return an array with the top 100 most similar users to *user*
+            @similar_users[user] = top
+            return top
+        else
+            return @similar_users[user]
         end
-        users.each do |u|
-            users[u[0]] = self.similarity(u[0],user)    #calculate similarity index between *user* and the rest. Store in hash
-        end
-        similarity_list=(users.sort_by {|key, value| value}).reverse       #sort and reverse hash
-        top = similarity_list[0..10]                                        #return an array with the top 100 most similar users to *user*
     end
 end
