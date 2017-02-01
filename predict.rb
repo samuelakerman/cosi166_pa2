@@ -104,8 +104,8 @@ puts "Rating of 5: " + (results[0]["5"].to_f/results[2]*100).round(1).to_s
 puts " "
 
 puts "The percentage of incorrectly assigned ratings by rating:"
-puts "Rating of 1: " + (results[1]["1"].to_f/results[0]*100).round(1).to_s
-puts "Rating of 2: " + (results[1]["2"].to_f/results[0]*100).round(1).to_s
-puts "Rating of 3: " + (results[1]["3"].to_f/results[0]*100).round(1).to_s
-puts "Rating of 4: " + (results[1]["4"].to_f/results[0]*100).round(1).to_s
-puts "Rating of 5: " + (results[1]["5"].to_f/results[0]*100).round(1).to_s
+puts "Rating of 1: " + (results[1]["1"].to_f/results[2]*100).round(1).to_s
+puts "Rating of 2: " + (results[1]["2"].to_f/results[2]*100).round(1).to_s
+puts "Rating of 3: " + (results[1]["3"].to_f/results[2]*100).round(1).to_s
+puts "Rating of 4: " + (results[1]["4"].to_f/results[2]*100).round(1).to_s
+puts "Rating of 5: " + (results[1]["5"].to_f/results[2]*100).round(1).to_s
