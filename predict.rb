@@ -95,8 +95,6 @@ results = controler_predict.run
 end_time = Time.now
 puts "The analysis took " + ((end_time - start_timme)/60).round(2).to_s + " minutes."
 
-byebug
-
 puts "The percentage of correctly predicted ratings by rating:"
 puts "Rating of 1: " + results[0]["1"]/results[2]
 puts "Rating of 2: " + results[0]["2"]/results[2]
