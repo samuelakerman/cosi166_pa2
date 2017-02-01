@@ -1,13 +1,6 @@
 =begin
 Brandeis University - Capstone Project Software Engineering
 PA2 assignment - written by Samuel Akerman Jan-2017
-
-
-user_id
-movie_id
-rating
-timestamp
-
 =end
 
 require 'byebug'
